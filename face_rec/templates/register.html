@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Registration</title>
+  <style>
+    /* CSS styles for the form */
+    body {
+      font-family: Arial, sans-serif;
+    }
+    
+    h1 {
+      text-align: center;
+    }
+    
+    #registration-form {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f4f4f4;
+      border-radius: 5px;
+    }
+    
+    #registration-form label {
+      display: block;
+      margin-bottom: 10px;
+    }
+    
+    #registration-form input[type="text"],
+    #registration-form input[type="file"] {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    
+    #registration-form button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    
+    #registration-form button:hover {
+      background-color: #45a049;
+    }
+    
+    #image-preview {
+      margin-top: 20px;
+      text-align: center;
+    }
+    
+    #image-preview img {
+      max-width: 200px;
+      max-height: 200px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>User Registration</h1>
+  <div id="registration-form">
+    <form action="process_registration.php" method="post" enctype="multipart/form-data">
+      <label for="fullname">Full Name:</label>
+      <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required>
+      
+      <label for="email">Email:</label>
+      <input type="text" id="email" name="email" placeholder="Enter your email" required>
+      
+      <label for="profile-picture">Profile Picture:</label>
+      <input type="file" id="profile-picture" name="profile-picture" accept="image/*" required>
+      
+      <div id="image-preview" >
+        <img id="preview-img" src="#" alt="Preview" style="display: none;">
+      </div>
+      
+      <button type="submit">Register</button>
+    </form>
+  </div>
+
+  <script>
+    // JavaScript code to display the selected image
+    const profilePictureInput = document.getElementById('profile-picture');
+    const previewImage = document.getElementById('preview-img');
+    
+    profilePictureInput.addEventListener('change', function() {
+      const file = this.files[0];
+      
+      if (file) {
+        const reader = new FileReader();
+        
+        reader.addEventListener('load', function() {
+          previewImage.src = reader.result;
+          previewImage.style.display = 'block';
+        });
+        
+        reader.readAsDataURL(file);
+      }
+    });
+  </script>
+</body>
+</html>
